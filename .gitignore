@@ -1,0 +1,21 @@
+# Veri dosyaları
+data/products.json
+data/cart.json
+
+# IDE dosyaları
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS dosyaları
+.DS_Store
+Thumbs.db
+
+# Log dosyaları
+*.log
+
+# Session dosyaları
+sessions/
+
