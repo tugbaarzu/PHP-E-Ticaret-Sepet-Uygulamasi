@@ -1,23 +1,19 @@
 <?php
 session_start();
 
-// Veri dosyaları
 $productsFile = 'data/products.json';
 $cartFile = 'data/cart.json';
 
-// Klasörleri oluştur
 if (!file_exists('data')) {
     mkdir('data', 0777, true);
 }
 
-// Ürünleri yükle
 function loadProducts() {
     global $productsFile;
     if (file_exists($productsFile)) {
         $content = file_get_contents($productsFile);
         return json_decode($content, true) ?: [];
     }
-    // Varsayılan ürünler
     $defaultProducts = [
         [
             'id' => 1,
@@ -72,13 +68,11 @@ function loadProducts() {
     return $defaultProducts;
 }
 
-// Ürünleri kaydet
 function saveProducts($products) {
     global $productsFile;
     file_put_contents($productsFile, json_encode($products, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 }
 
-// Sepeti yükle
 function loadCart() {
     global $cartFile;
     if (file_exists($cartFile)) {
@@ -88,13 +82,11 @@ function loadCart() {
     return [];
 }
 
-// Sepeti kaydet
 function saveCart($cart) {
     global $cartFile;
     file_put_contents($cartFile, json_encode($cart, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 }
 
-// Sepete ekle
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_to_cart') {
     $productId = intval($_POST['product_id']);
     $quantity = intval($_POST['quantity'] ?? 1);
@@ -218,4 +210,5 @@ unset($_SESSION['message']);
     <script src="js/main.js"></script>
 </body>
 </html>
+
 
