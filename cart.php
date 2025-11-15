@@ -1,11 +1,9 @@
 <?php
 session_start();
 
-// Veri dosyaları
 $cartFile = 'data/cart.json';
 $productsFile = 'data/products.json';
 
-// Sepeti yükle
 function loadCart() {
     global $cartFile;
     if (file_exists($cartFile)) {
@@ -15,13 +13,11 @@ function loadCart() {
     return [];
 }
 
-// Sepeti kaydet
 function saveCart($cart) {
     global $cartFile;
     file_put_contents($cartFile, json_encode($cart, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 }
 
-// Sepetten çıkar
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cart = loadCart();
     
@@ -66,7 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $cart = loadCart();
 $cartCount = array_sum(array_column($cart, 'quantity'));
 
-// Toplam hesapla
 $subtotal = 0;
 foreach ($cart as $item) {
     $subtotal += $item['price'] * $item['quantity'];
@@ -195,4 +190,5 @@ unset($_SESSION['message']);
     <script src="js/main.js"></script>
 </body>
 </html>
+
 
